@@ -6,8 +6,7 @@ for (let symbol in stockData) {
    div.className = "dashboard-grid";
 
    let ticker = document.createElement("h3");
-   ticker.className = "ticker";
-   ticker.className = "accent";
+   ticker.className = "ticker accent";
    ticker.textContent = symbol;
    div.appendChild(ticker);
 
@@ -17,31 +16,30 @@ for (let symbol in stockData) {
    let closePrice = parseFloat(recentData['4. close']);
    let averagePrice = (openPrice + closePrice) / 2;
 
-   let current = document.createElement("h3");
-   current.className = "current";
-   current.textContent = "Current: $" + averagePrice.toFixed(2);
-   div.appendChild(current);
+   let dataPoints = [
+      { label: 'Current', value: averagePrice.toFixed(2) },
+      { label: 'High', value: parseFloat(recentData['2. high']).toFixed(2) },
+      { label: 'Low', value: parseFloat(recentData['3. low']).toFixed(2) },
+      { label: 'Open', value: parseFloat(recentData['1. open']).toFixed(2) },
+      { label: 'Close', value: parseFloat(recentData['4. close']).toFixed(2) }
+   ];
 
+   for (let dataPoint of dataPoints) {
+      let dataDiv = document.createElement("div");
+      dataDiv.className = "data-point";
 
-   let high = document.createElement("h3");
-   high.className = "high";
-   high.textContent = "H: $" + parseFloat(recentData['2. high']).toFixed(2);
-   div.appendChild(high);
+      let label = document.createElement("h3");
+      label.className = "label accent";
+      label.textContent = dataPoint.label + ":";
+      dataDiv.appendChild(label);
 
-   let low = document.createElement("h3");
-   low.className = "low";
-   low.textContent = "L: $" + parseFloat(recentData['3. low']).toFixed(2);
-   div.appendChild(low);
+      let value = document.createElement("h3");
+      value.className = "value";
+      value.textContent = "$" + dataPoint.value;
+      dataDiv.appendChild(value);
 
-   let open = document.createElement("h3");
-   open.className = "open";
-   open.textContent = "O: $" + parseFloat(recentData['1. open']).toFixed(2);
-   div.appendChild(open);
-
-   let close = document.createElement("h3");
-   close.className = "close";
-   close.textContent = "C: $" + parseFloat(recentData['4. close']).toFixed(2);
-   div.appendChild(close);
+      div.appendChild(dataDiv);
+   }
 
    // Add the onclick event
    div.onclick = function() {

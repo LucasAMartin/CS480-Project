@@ -35,7 +35,7 @@ h1, h2 {
 }
 
 h3 {
-    font-size: 1.2vw;
+    font-size: 1rem;
 }
 
 .accent {
@@ -56,10 +56,33 @@ h3 {
     float: left;
 }
 
+.data-point {
+   display: flex;
+   flex-direction: column;
+    justify-content: center;
+}
+
+.label {
+   order: 1;
+    margin: 0;
+    font-size: 0.75rem;
+    align-self: start;
+}
+
+.value {
+   order: 2;
+    margin: 0;
+}
+
+
 body div h3 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.ticker.accent {
+    font-size: 1.3rem;
 }
 
 
