@@ -12,13 +12,9 @@ def get_data(url):
     if data is not None:
         timestamp, data_str = data[1], data[2]
         data = json.loads(data_str)  # Convert JSON string back to dict
-        # TEMP RETURN SO THAT DATABASE DOESNT CHANGE FOR TESTING
-        # TODO DELETE THIS FOR PRODUCTION
-        return data
-#       if datetime.now() - datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S.%f') < timedelta(hours=24):
-#            print(url + " found in cache")
-#            print(data)
-#            return data
+        if datetime.now() - datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S.%f') < timedelta(hours=24):
+            print(url + " found in cache")
+            return data
 
     # If data is not in the database, or it's older than 24 hours, make a new request
     r = requests.get(url, timeout=5)
@@ -29,7 +25,6 @@ def get_data(url):
     models.delete_data(url)
     models.insert_data(url, data_str)
     print(url + " not found in cache")
-    print(data)
     return data
 
 
