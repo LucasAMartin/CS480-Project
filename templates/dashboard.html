@@ -10,6 +10,7 @@
 <script>
    let url = '{{ url }}';
    let stockData = JSON.parse('{{ stock_data | tojson | safe }}');
+   let previousData = JSON.parse('{{ previous_data | tojson | safe }}');
 </script>
 <header>
    <a href="/">
